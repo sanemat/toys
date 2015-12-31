@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"path/filepath"
 )
 
 func main() {
-	out, err := exec.Command("go", "build", "-o", "out/cat", "cat.go").Output()
+	out, err := exec.Command("go", "build", "-o", filepath.Join("out", "cat"), "cat.go").Output()
 	if err != nil {
 		log.Fatal(err)
 	}
