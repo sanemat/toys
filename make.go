@@ -32,6 +32,24 @@ func fmtAll() {
 	}
 }
 
+func beforeScript() {
+	if out, err := exec.Command("go", "get", "golang.org/x/tools/cmd/vet").Output(); err != nil {
+		log.Fatal(err)
+	} else {
+		fmt.Print(string(out))
+	}
+	if out, err := exec.Command("go", "get", "golang.org/x/tools/cmd/goimports").Output(); err != nil {
+		log.Fatal(err)
+	} else {
+		fmt.Print(string(out))
+	}
+	if out, err := exec.Command("go", "get", "github.com/golang/lint/golint").Output(); err != nil {
+		log.Fatal(err)
+	} else {
+		fmt.Print(string(out))
+	}
+}
+
 func main() {
 	action := ""
 	if len(os.Args) == 2 {
@@ -44,6 +62,8 @@ func main() {
 		buildEcho()
 	case "fmt":
 		fmtAll()
+	case "beforescript":
+		beforeScript()
 	default:
 		panic("Unknown action: " + action)
 	}
