@@ -50,6 +50,14 @@ func beforeScript() {
 	}
 }
 
+func goVet() {
+	if out, err := exec.Command("go", "vet", "./...").Output(); err != nil {
+		log.Fatal(err)
+	} else {
+		fmt.Print(string(out))
+	}
+}
+
 func main() {
 	action := ""
 	if len(os.Args) == 2 {
@@ -64,6 +72,8 @@ func main() {
 		fmtAll()
 	case "beforescript":
 		beforeScript()
+	case "govet":
+		goVet()
 	default:
 		panic("Unknown action: " + action)
 	}
