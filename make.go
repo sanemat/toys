@@ -66,6 +66,14 @@ func goLint() {
 	}
 }
 
+func goImports() {
+	if out, err := exec.Command("goimports", "-l", "./").Output(); err != nil {
+		log.Fatal(err)
+	} else if len(out) != 0 {
+		log.Fatal(string(out))
+	}
+}
+
 func main() {
 	action := ""
 	if len(os.Args) == 2 {
@@ -84,6 +92,8 @@ func main() {
 		goVet()
 	case "golint":
 		goLint()
+	case "goimports":
+		goImports()
 	default:
 		panic("Unknown action: " + action)
 	}

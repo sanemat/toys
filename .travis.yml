@@ -8,4 +8,4 @@ before_script:
 script:
   - go run make.go govet
   - go run make.go golint
-  - goimports -l ./ | tee /dev/tty | xargs -r false
+  - go run make.go goimports
