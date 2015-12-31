@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 	"os/exec"
 	"path/filepath"
 )
@@ -24,6 +25,16 @@ func buildEcho() {
 }
 
 func main() {
-	buildCat()
-	buildEcho()
+	action := ""
+	if len(os.Args) == 2 {
+		action = os.Args[1]
+	}
+
+	switch action {
+	case "build":
+		buildCat()
+		buildEcho()
+	default:
+		panic("Unknown action: " + action)
+	}
 }
