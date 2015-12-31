@@ -1,10 +1,11 @@
 package main
 
 import (
-	"os"
-	"fmt"
 	"bufio"
+	"fmt"
+	"os"
 )
+
 func main() {
 	// https://golang.org/pkg/bufio/#example_Scanner_lines
 	scanner := bufio.NewScanner(os.Stdin)
