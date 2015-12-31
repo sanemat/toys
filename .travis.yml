@@ -6,6 +6,4 @@ install:
 before_script:
   - go run make.go beforescript
 script:
-  - go run make.go govet
-  - go run make.go golint
-  - go run make.go goimports
+  - go run make.go script

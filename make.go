@@ -94,6 +94,10 @@ func main() {
 		goLint()
 	case "goimports":
 		goImports()
+	case "script":
+		goVet()
+		goLint()
+		goImports()
 	default:
 		panic("Unknown action: " + action)
 	}
