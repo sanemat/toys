@@ -24,6 +24,14 @@ func buildEcho() {
 	fmt.Print(string(out))
 }
 
+func fmtAll() {
+	out, err := exec.Command("go", "fmt", "./...").Output()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Print(string(out))
+}
+
 func main() {
 	action := ""
 	if len(os.Args) == 2 {
@@ -34,6 +42,8 @@ func main() {
 	case "build":
 		buildCat()
 		buildEcho()
+	case "fmt":
+		fmtAll()
 	default:
 		panic("Unknown action: " + action)
 	}
