@@ -9,27 +9,27 @@ import (
 )
 
 func buildCat() {
-	out, err := exec.Command("go", "build", "-o", filepath.Join("out", "cat"), "cat.go").Output()
-	if err != nil {
+	if out, err := exec.Command("go", "build", "-o", filepath.Join("out", "cat"), "cat.go").Output(); err != nil {
 		log.Fatal(err)
+	} else {
+		fmt.Print(string(out))
 	}
-	fmt.Print(string(out))
 }
 
 func buildEcho() {
-	out, err := exec.Command("go", "build", "-o", filepath.Join("out", "echo"), "echo.go").Output()
-	if err != nil {
+	if out, err := exec.Command("go", "build", "-o", filepath.Join("out", "echo"), "echo.go").Output(); err != nil {
 		log.Fatal(err)
+	} else {
+		fmt.Print(string(out))
 	}
-	fmt.Print(string(out))
 }
 
 func fmtAll() {
-	out, err := exec.Command("go", "fmt", "./...").Output()
-	if err != nil {
+	if out, err := exec.Command("go", "fmt", "./...").Output(); err != nil {
 		log.Fatal(err)
+	} else {
+		fmt.Print(string(out))
 	}
-	fmt.Print(string(out))
 }
 
 func main() {
