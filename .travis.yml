@@ -6,6 +6,6 @@ install:
 before_script:
   - go run make.go beforescript
 script:
-  - go vet ./...
+  - go run make.go govet
   - golint ./... | tee /dev/tty | xargs -r false
   - goimports -l ./ | tee /dev/tty | xargs -r false
