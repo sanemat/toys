@@ -58,6 +58,14 @@ func goVet() {
 	}
 }
 
+func goLint() {
+	if out, err := exec.Command("golint", "./...").Output(); err != nil {
+		log.Fatal(err)
+	} else if len(out) != 0 {
+		log.Fatal(string(out))
+	}
+}
+
 func main() {
 	action := ""
 	if len(os.Args) == 2 {
@@ -74,6 +82,8 @@ func main() {
 		beforeScript()
 	case "govet":
 		goVet()
+	case "golint":
+		goLint()
 	default:
 		panic("Unknown action: " + action)
 	}

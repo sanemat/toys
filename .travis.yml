@@ -7,5 +7,5 @@ before_script:
   - go run make.go beforescript
 script:
   - go run make.go govet
-  - golint ./... | tee /dev/tty | xargs -r false
+  - go run make.go golint
   - goimports -l ./ | tee /dev/tty | xargs -r false
