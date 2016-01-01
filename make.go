@@ -8,43 +8,51 @@ import (
 	"path/filepath"
 )
 
+func buildCommand(fileName string, commandName string) (string, error) {
+	builtFile := filepath.Join("out", commandName)
+	if _, err := exec.Command("go", "build", "-o", builtFile, fileName).Output(); err != nil {
+		return builtFile, err
+	}
+	return builtFile, nil
+}
+
 func buildCat() {
-	if out, err := exec.Command("go", "build", "-o", filepath.Join("out", "cat"), "cat.go").Output(); err != nil {
+	if out, err := buildCommand("cat.go", "cat"); err != nil {
 		log.Fatal(err)
 	} else {
-		fmt.Print(string(out))
+		fmt.Println(out)
 	}
 }
 
 func buildEcho() {
-	if out, err := exec.Command("go", "build", "-o", filepath.Join("out", "echo"), "echo.go").Output(); err != nil {
+	if out, err := buildCommand("echo.go", "echo"); err != nil {
 		log.Fatal(err)
 	} else {
-		fmt.Print(string(out))
+		fmt.Println(out)
 	}
 }
 
 func buildSieve() {
-	if out, err := exec.Command("go", "build", "-o", filepath.Join("out", "sieve"), "sieve.go").Output(); err != nil {
+	if out, err := buildCommand("sieve.go", "sieve"); err != nil {
 		log.Fatal(err)
 	} else {
-		fmt.Print(string(out))
+		fmt.Println(out)
 	}
 }
 
 func buildHead() {
-	if out, err := exec.Command("go", "build", "-o", filepath.Join("out", "head"), "head.go").Output(); err != nil {
+	if out, err := buildCommand("head.go", "head"); err != nil {
 		log.Fatal(err)
 	} else {
-		fmt.Print(string(out))
+		fmt.Println(out)
 	}
 }
 
 func buildTail() {
-	if out, err := exec.Command("go", "build", "-o", filepath.Join("out", "tail"), "tail.go").Output(); err != nil {
+	if out, err := buildCommand("tail.go", "tail"); err != nil {
 		log.Fatal(err)
 	} else {
-		fmt.Print(string(out))
+		fmt.Println(out)
 	}
 }
 
