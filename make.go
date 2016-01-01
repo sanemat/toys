@@ -6,10 +6,17 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"runtime"
 )
 
 func buildCommand(fileName string, commandName string) (string, error) {
-	builtFile := filepath.Join("out", commandName)
+	var commandNameWithExt string
+	if runtime.GOOS == "windows" {
+		commandNameWithExt = commandName + ".exe"
+	} else {
+		commandNameWithExt = commandName
+	}
+	builtFile := filepath.Join("out", commandNameWithExt)
 	if _, err := exec.Command("go", "build", "-o", builtFile, fileName).Output(); err != nil {
 		return builtFile, err
 	}
