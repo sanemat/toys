@@ -24,6 +24,14 @@ func buildEcho() {
 	}
 }
 
+func buildSieve() {
+	if out, err := exec.Command("go", "build", "-o", filepath.Join("out", "sieve"), "sieve.go").Output(); err != nil {
+		log.Fatal(err)
+	} else {
+		fmt.Print(string(out))
+	}
+}
+
 func fmtAll() {
 	if out, err := exec.Command("go", "fmt", "./...").Output(); err != nil {
 		log.Fatal(err)
@@ -84,6 +92,7 @@ func main() {
 	case "build":
 		buildCat()
 		buildEcho()
+		buildSieve()
 	case "fmt":
 		fmtAll()
 	case "beforescript":
