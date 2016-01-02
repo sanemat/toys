@@ -17,7 +17,8 @@ func buildCommand(fileName string, commandName string) (string, error) {
 		commandNameWithExt = commandName
 	}
 	builtFile := filepath.Join("out", commandNameWithExt)
-	if _, err := exec.Command("go", "build", "-o", builtFile, fileName).Output(); err != nil {
+	comm := []string{"go", "build", "-o", builtFile, fileName}
+	if _, err := exec.Command(comm[0], comm[1:]...).Output(); err != nil {
 		return builtFile, err
 	}
 	return builtFile, nil
@@ -72,7 +73,8 @@ func buildCountByte() {
 }
 
 func fmtAll() {
-	if out, err := exec.Command("go", "fmt", "./...").Output(); err != nil {
+	comm := []string{"go", "fmt", "./..."}
+	if out, err := exec.Command(comm[0], comm[1:]...).Output(); err != nil {
 		log.Fatal(err)
 	} else {
 		fmt.Print(string(out))
@@ -80,17 +82,21 @@ func fmtAll() {
 }
 
 func beforeScript() {
-	if out, err := exec.Command("go", "get", "golang.org/x/tools/cmd/vet").Output(); err != nil {
+	var comm []string
+	comm = []string{"go", "get", "golang.org/x/tools/cmd/vet"}
+	if out, err := exec.Command(comm[0], comm[1:]...).Output(); err != nil {
 		log.Fatal(err)
 	} else {
 		fmt.Print(string(out))
 	}
-	if out, err := exec.Command("go", "get", "golang.org/x/tools/cmd/goimports").Output(); err != nil {
+	comm = []string{"go", "get", "golang.org/x/tools/cmd/goimports"}
+	if out, err := exec.Command(comm[0], comm[1:]...).Output(); err != nil {
 		log.Fatal(err)
 	} else {
 		fmt.Print(string(out))
 	}
-	if out, err := exec.Command("go", "get", "github.com/golang/lint/golint").Output(); err != nil {
+	comm = []string{"go", "get", "github.com/golang/lint/golint"}
+	if out, err := exec.Command(comm[0], comm[1:]...).Output(); err != nil {
 		log.Fatal(err)
 	} else {
 		fmt.Print(string(out))
@@ -98,7 +104,8 @@ func beforeScript() {
 }
 
 func goVet() {
-	if out, err := exec.Command("go", "vet", "./...").Output(); err != nil {
+	comm := []string{"go", "vet", "./..."}
+	if out, err := exec.Command(comm[0], comm[1:]...).Output(); err != nil {
 		log.Fatal(err)
 	} else {
 		fmt.Print(string(out))
@@ -106,7 +113,8 @@ func goVet() {
 }
 
 func goLint() {
-	if out, err := exec.Command("golint", "./...").Output(); err != nil {
+	comm := []string{"golint", "./..."}
+	if out, err := exec.Command(comm[0], comm[1:]...).Output(); err != nil {
 		log.Fatal(err)
 	} else if len(out) != 0 {
 		log.Fatal(string(out))
@@ -114,7 +122,8 @@ func goLint() {
 }
 
 func goImports() {
-	if out, err := exec.Command("goimports", "-l", "./").Output(); err != nil {
+	comm := []string{"goimports", "-l", "./"}
+	if out, err := exec.Command(comm[0], comm[1:]...).Output(); err != nil {
 		log.Fatal(err)
 	} else if len(out) != 0 {
 		log.Fatal(string(out))
