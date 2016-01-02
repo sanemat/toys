@@ -17,7 +17,8 @@ func buildCommand(fileName string, commandName string) (string, error) {
 		commandNameWithExt = commandName
 	}
 	builtFile := filepath.Join("out", commandNameWithExt)
-	if _, err := exec.Command("go", "build", "-o", builtFile, fileName).Output(); err != nil {
+	comm := []string{"go", "build", "-o", builtFile, fileName}
+	if _, err := exec.Command(comm[0], comm[1:]...).Output(); err != nil {
 		return builtFile, err
 	}
 	return builtFile, nil
