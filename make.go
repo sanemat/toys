@@ -63,6 +63,14 @@ func buildTail() {
 	}
 }
 
+func buildCountByte() {
+	if out, err := buildCommand("countbyte.go", "countbyte"); err != nil {
+		log.Fatal(err)
+	} else {
+		fmt.Println(out)
+	}
+}
+
 func fmtAll() {
 	if out, err := exec.Command("go", "fmt", "./...").Output(); err != nil {
 		log.Fatal(err)
@@ -126,6 +134,7 @@ func main() {
 		buildSieve()
 		buildHead()
 		buildTail()
+		buildCountByte()
 	case "fmt":
 		fmtAll()
 	case "beforescript":
